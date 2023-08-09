@@ -13,18 +13,28 @@ function App() {
   }
 
   function onFindPetsClick() {
-    const url = ''
-    if (filters === `type: "all"`) {
+    let url = ''
+    if (filters.type === 'all') {
       url = `http://localhost:3001/pets`
-    } else url = `http://localhost:3001/pets?type${filters.type}`
-    console.log(url)
-    // fetch(url)
-    // .then(r => r.json())
-    // .then(pets => setPets(pets)) 
+    } else url = `http://localhost:3001/pets?type=${filters.type}`
+
+    fetch(url)
+    .then(r => r.json())
+    .then(pets => setPets(pets)) 
   }
 
-
-
+  function onAdoptPet(id) {
+    console.log('worked', id)
+    // fetch(`http://localhost:3001/pets${id}`, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": 'application/json'
+    //   },
+    //   body: JSON.stringify({
+    //     "isAdopted": true
+    //   })
+    // })
+  }
 
 
 
@@ -40,7 +50,7 @@ function App() {
             <Filters onChangeType={onChangeType} onFindPetsClick={onFindPetsClick}/>
           </div>
           <div className="twelve wide column">
-            <PetBrowser pets={pets}/>
+            <PetBrowser pets={pets} onAdoptPet={onAdoptPet}/>
           </div>
         </div>
       </div>

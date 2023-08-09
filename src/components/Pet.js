@@ -1,12 +1,17 @@
 import React from "react";
 
 function Pet({ pet }) {
-  const { id, type, gender, age, weight, name, isAdopted } = pet
+  const { id, type, gender, age, weight, name, isAdopted, onAdoptPet } = pet
   
   function genderType() {
     if(gender === "male") {
       return '♀'
     } else return '♂'
+  }
+
+  function onAdoptClick() {
+    //console.log(id)
+    onAdoptPet(id)
   }
 
   return (
@@ -27,7 +32,7 @@ function Pet({ pet }) {
       <div className="extra content">
         {
         isAdopted? <button className="ui disabled button">Already adopted</button> :
-        <button className="ui primary button">Adopt pet</button>
+        <button className="ui primary button" onClick={onAdoptClick}>Adopt pet</button>
         }
       </div>
     </div>
